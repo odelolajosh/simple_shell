@@ -115,3 +115,16 @@ int _setenv(shell_t *shell, char *name, char *value, int overwrite)
 
 	return (0);
 }
+
+/**
+ * hsh_env - prints env variables
+ *
+ * @shell: shell data
+ * Return: 0 for success otherwise another integer
+ */
+int hsh_env(shell_t *shell)
+{
+	(void) shell;
+	/* Todo -> print envs */
+	return (0);
+}

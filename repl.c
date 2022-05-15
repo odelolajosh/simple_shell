@@ -8,9 +8,10 @@
 void repl(shell_t *shell)
 {
 	char *cmd;
-	int chr;
+	int chr, flag, isLoop;
 
 	do {
+		isLoop = 1;
 		prompt();
 
 		cmd = read_line(&chr);
@@ -18,14 +19,14 @@ void repl(shell_t *shell)
 		{
 			free(cmd);
 			write(STDOUT_FILENO, "\n", 2);
-			exit(EXIT_SUCCESS);
+			return;
 		}
 
 		if (cmd == NULL)
 			continue;
 
-		parse_command(shell, cmd);
-		
-		free(cmd);
-	} while (1);
+		flag = parse_command(shell, cmd);
+		if (flag == EXIT_IND)
+			isLoop = 0;
+	} while (isLoop);
 }

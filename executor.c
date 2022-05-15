@@ -20,6 +20,12 @@ char *_which(char **_environ, char *command)
 	if (!path)
 		return (NULL);
 
+	if (command[0] == '/')
+	{
+		if (stat(command, &st) == 0)
+			return (_strdup(command));
+	}
+
 	path_dup = _strdup(path);
 	len_cmd = _strlen(command);
 	spath = strtok(path_dup, ":");
@@ -47,11 +53,6 @@ char *_which(char **_environ, char *command)
 	}
 	free(path_dup);
 
-	if (command[0] == '/')
-	{
-		if (stat(command, &st) == 0)
-			return (_strdup(command));
-	}
 	return (NULL);
 }
 

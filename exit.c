@@ -8,6 +8,6 @@
  */
 int hsh_exit(shell_t *shell)
 {
-	uninitialize(shell);
-	exit(EXIT_SUCCESS);
+	(void) shell;
+	return (EXIT_IND);
 }

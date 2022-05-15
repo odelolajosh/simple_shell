@@ -4,6 +4,7 @@
 #define BUFSIZE 1024
 #define TOKEN_BUFSIZE 128
 #define TOKEN_DELIM " \t\r\n\a"
+#define EXIT_IND 2
 
 #include <stdio.h>
 #include <stdlib.h>

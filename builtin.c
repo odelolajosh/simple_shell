@@ -13,7 +13,7 @@ int (*get_builtin_handl(const char *command))(shell_t *shell)
 	unsigned int i;
 	builtin_t builtins[] = {
 		{ "exit", hsh_exit },
-		/* { "env", hsh_env }, */
+		{ "env", hsh_env },
 		{ NULL, NULL }
 	};
 
