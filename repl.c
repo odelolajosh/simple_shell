@@ -25,7 +25,7 @@ void repl(shell_t *shell)
 			continue;
 
 		parse_command(shell, cmd);
-
+		
 		free(cmd);
 	} while (1);
 }

@@ -29,6 +29,7 @@ char *_which(char **_environ, char *command)
 		file = malloc(sizeof(char) * (len_spath + len_cmd + 2));
 		if (!file)
 		{
+			free(path_dup);
 			write(STDERR_FILENO, ": allocation error\n", 18);
 			exit(EXIT_FAILURE);
 		}
@@ -49,7 +50,7 @@ char *_which(char **_environ, char *command)
 	if (command[0] == '/')
 	{
 		if (stat(command, &st) == 0)
-			return (command);
+			return (_strdup(command));
 	}
 	return (NULL);
 }
@@ -66,7 +67,6 @@ int execute(shell_t *shell)
 	int sys;
 	char *file;
 
-	/* Todo ->  Check if executable */
 	file = _which(shell->environ, shell->argv[0]);
 	if (!file)
 	{
@@ -89,5 +89,6 @@ int execute(shell_t *shell)
 		wait(&sys);
 	}
 
+	free(file);
 	return (1);
 }

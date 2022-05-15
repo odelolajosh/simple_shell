@@ -39,22 +39,43 @@ typedef struct token
 	struct token *next;
 } token_t;
 
+/**
+ * struct builtin - builtins
+ *
+ * @value: value of builtin
+ * @handl: builtin handler
+ */
+typedef struct builtin
+{
+	char *name;
+	int (*handl)(shell_t *shell);
+} builtin_t;
+
 extern char **environ;
 
+/* setup */
 void initialize(shell_t *shell);
 void uninitialize(shell_t *shell);
 void handl_signint(int sig);
 void repl(shell_t *shell);
 
-char **tokenize(char *s);
-
+/* env */
 char *_getenv(char **_environ, const char *name);
 int _setenv(shell_t *shell, char *name, char *value, int overwrite);
 
+/* executor */
 int parse_command(shell_t *shell, char *command);
 int execute(shell_t *shell);
 
+/* builtins */
+int (*get_builtin_handl(const char *cmd))(shell_t *shell);
+int hsh_exit(shell_t *shell);
+int hsh_env(shell_t *shell);
+int hsh_cd(shell_t *shell);
+
+/* utils */
 void prompt(void);
 char *read_line(int *chr);
+char **tokenize(char *s);
 
 #endif /* SHELL_H */
