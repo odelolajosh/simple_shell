@@ -7,8 +7,12 @@
  */
 int main(void)
 {
+	shell_t shell;
+
+	initialize(&shell);
 	signal(SIGINT, handl_signint);
-	repl();
+	repl(&shell);
+	uninitialize(&shell);
 
 	return (0);
 }

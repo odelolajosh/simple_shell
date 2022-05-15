@@ -2,8 +2,10 @@
 
 /**
  * repl - Read-Eval-Print-Loop for the shell
+ *
+ * @shell: shell data
  */
-void repl(void)
+void repl(shell_t *shell)
 {
 	char *cmd;
 	int chr;
@@ -21,6 +23,8 @@ void repl(void)
 
 		if (cmd == NULL)
 			continue;
+
+		parse_command(shell, cmd);
 
 		free(cmd);
 	} while (1);
