@@ -82,7 +82,7 @@ char *makeenv(char *var, char *val)
 int _setenv(shell_t *shell, char *name, char *value, int overwrite)
 {
 	unsigned int i;
-	char *envv, *var_env, *val_env, *backup, *newenv;
+	char *envv, *var_env, *backup, *newenv;
 
 	for (i = 0; shell->environ[i]; i++)
 	{

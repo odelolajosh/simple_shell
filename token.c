@@ -22,7 +22,7 @@ char **tokenize(char *s)
 	token = strtok(s, TOKEN_DELIM);
 	argv[0] = token;
 
-	for (int i = 1; token; i++)
+	for (i = 1; token; i++)
 	{
 		if (i == bufsize)
 		{

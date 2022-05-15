@@ -8,7 +8,7 @@
  */
 char *_strdup(const char *s)
 {
-	size_t len, i;
+	size_t len;
 	char *dup;
 
 	len = _strlen(s);
@@ -51,6 +51,8 @@ void *_memcpy(void *dest, const void *src, size_t n)
 
 	for (i = 0; i < n; i++)
 		dest_ptr[i] = src_ptr[i];
+	
+	return (dest_ptr);
 }
 
 /**
@@ -87,7 +89,6 @@ char *_strcat(char *dest, const char *src)
 int _strcmp(const char *s1, const char *s2)
 {
 	int i;
-	int j;
 
 	for (i = 0; s1[i] == s2[i] && s1[i]; i++)
 		;
