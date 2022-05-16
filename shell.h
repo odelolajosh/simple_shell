@@ -43,7 +43,7 @@ typedef struct token
 /**
  * struct builtin - builtins
  *
- * @value: value of builtin
+ * @name: name of builtin
  * @handl: builtin handler
  */
 typedef struct builtin

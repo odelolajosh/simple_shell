@@ -51,7 +51,7 @@ void *_memcpy(void *dest, const void *src, size_t n)
 
 	for (i = 0; i < n; i++)
 		dest_ptr[i] = src_ptr[i];
-	
+
 	return (dest_ptr);
 }
 

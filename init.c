@@ -40,11 +40,4 @@ void uninitialize(shell_t *shell)
 	for (i = 0; shell->environ[i]; i++)
 		free(shell->environ[i]);
 	free(shell->environ);
-
-	/*
-	free(shell->command);
-	for (i = 0; shell->argv[i]; i++)
-		free(shell->argv[i]);
-	free(shell->argv);
-	*/
 }
