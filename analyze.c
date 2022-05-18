@@ -36,14 +36,14 @@ char *remove_comment(char *s)
 }
 
 /**
- * analyse_cmd - performs comment removal and variable expansion
+ * analyze_cmd - performs comment removal and variable expansion
  * on string
  * @shell: shell data
  * @cmd: command input
  * Return: String without comment
  * If there is no string return NULL
  */
-char *analyse_cmd(shell_t *shell, char *cmd)
+char *analyze_cmd(shell_t *shell, char *cmd)
 {
 	(void) shell;
 

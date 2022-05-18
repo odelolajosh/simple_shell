@@ -14,7 +14,7 @@ int parse_command(shell_t *shell, char *command)
 	int flag = 0;
 	int (*handl)(shell_t *shell);
 
-	command = analyse_cmd(shell, command);
+	command = analyze_cmd(shell, command);
 	if (!command)
 		return (0);
 

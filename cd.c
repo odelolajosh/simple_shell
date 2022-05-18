@@ -58,13 +58,16 @@ void cd_home(shell_t *shell)
  */
 void cd_prev(shell_t *shell)
 {
-	char *prwd;
+	char *prwd, cwd[PATH_MAX], len;
 
 	prwd = _getenv(shell->environ, "OLDPWD");
 	if (prwd)
 		cd_to(shell, prwd);
-	else
-		write(STDERR_FILENO, "hsh: cd: OLDPWD not set\n", 24);
+
+	getcwd(cwd, sizeof(cwd));
+	len = _strlen(cwd);
+	write(STDOUT_FILENO, cwd, len + 1);
+	write(STDOUT_FILENO, "\n", 2);
 }
 
 /**
@@ -75,8 +78,7 @@ void cd_prev(shell_t *shell)
  */
 int hsh_cd(shell_t *shell)
 {
-	/* write(STDERR_FILENO, "hsh: expected argument to \"cd\"\n", 32); */
-	if (shell->argv[1] == NULL)
+	if (shell->argv[1] == NULL || (_strcmp(shell->argv[1], "~") == 0))
 		cd_home(shell);
 	else if (_strcmp(shell->argv[1], "-") == 0)
 		cd_prev(shell);

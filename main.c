@@ -16,5 +16,5 @@ int main(int ac, char **av)
 	repl(&shell);
 	uninitialize(&shell);
 
-	return (0);
+	return (shell.exitcode);
 }
