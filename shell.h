@@ -76,6 +76,7 @@ int hsh_unsetenv(shell_t *shell);
 void prompt(void);
 char *read_line(int *chr);
 char **tokenize(char *s);
+char *analyse_cmd(shell_t *shell, char *cmd);
 
 /* error */
 void write_error(shell_t *shell, int status);

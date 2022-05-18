@@ -55,6 +55,62 @@ char *_which(char **_environ, char *command)
 }
 
 /**
+ * can_execute - check if a path can be executed
+ *
+ * @path: path
+ * Return: 0 on success otherwise 1
+ */
+int can_execute(char *path)
+{
+	struct stat st;
+	int i;
+
+	for (i = 0; path[i]; i++) /* is a valid path */
+	{
+		if (path[i] == '.')
+		{
+			if (path[i + 1] == '/')
+				i++;
+			else if (path[i + 1] == '.' && path[i + 2] == '/')
+				i += 2;
+			else
+				return (1);
+		}
+	}
+
+	if (stat(path, &st) == 0)
+	{
+		return (0);
+	}
+
+	return (1);
+}
+
+/**
+ * check_error - check for possible errors for file to be executed
+ *
+ * @shell: shell data
+ * @file: file to be execute
+ * Return: 0 for success otherwise 1
+ */
+int check_error(shell_t *shell, char *file)
+{
+	if (file == NULL)
+	{
+		write_error(shell, 127);
+		return (1);
+	}
+
+	if (access(file, X_OK) == -1)
+	{
+		write_error(shell, 126);
+		return (1);
+	}
+
+	return (0);
+}
+
+/**
  * execute - executes a command
  *
  * @shell: shell data
@@ -63,15 +119,27 @@ char *_which(char **_environ, char *command)
 int execute(shell_t *shell)
 {
 	pid_t pid;
-	int sys;
+	int sys, flag;
 	char *file;
 
-	file = _which(shell->environ, shell->argv[0]);
-	if (!file)
+	/* Check if file is execuatable non-PATH path */
+	flag = can_execute(shell->argv[0]);
+	if (flag == 0)
 	{
-		write_error(shell, 127);
-		return (1);
+		file = _strdup(shell->argv[0]);
 	}
+	else
+	{
+		file = _which(shell->environ, shell->argv[0]);
+		if (!file)
+		{
+			write_error(shell, 127);
+			return (1);
+		}
+	}
+
+	if (check_error(shell, file) == 1)
+		return (1);
 
 	pid = fork();
 	if (pid == 0)

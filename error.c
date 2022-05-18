@@ -85,7 +85,10 @@ void write_error(shell_t *shell, int status)
 
 	switch (status)
 	{
-		case 127:
+		case 126: /* Permission */
+			message = _strdup(": Permission denied\n");
+			break;
+		case 127: /* Not found */
 			message = _strdup(": not found\n");
 			break;
 		case 2:
