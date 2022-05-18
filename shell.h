@@ -22,7 +22,7 @@
  * @environ: env variables
  * @pName: the program name
  * @countP: counts number of processes
- * @exitcode: the value the code exits 
+ * @exitcode: the value the code exits
  */
 typedef struct shell
 {

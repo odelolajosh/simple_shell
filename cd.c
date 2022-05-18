@@ -5,7 +5,7 @@
 /**
  * cd_to - Changes the current directory of the process
  * to a given path
- * 
+ *
  * @shell: shell data
  * @path: directory to change to
  */
@@ -36,7 +36,7 @@ void cd_to(shell_t *shell, char *path)
 /**
  * cd_home - Changes the current directory of the process
  * to the path in "HOME" env variable
- * 
+ *
  * @shell: shell data
  */
 void cd_home(shell_t *shell)
@@ -53,7 +53,7 @@ void cd_home(shell_t *shell)
 /**
  * cd_prev - Changes the current directory of the process
  * to the previous path
- * 
+ *
  * @shell: shell data
  */
 void cd_prev(shell_t *shell)
