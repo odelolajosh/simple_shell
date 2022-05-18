@@ -69,7 +69,7 @@ int execute(shell_t *shell)
 	file = _which(shell->environ, shell->argv[0]);
 	if (!file)
 	{
-		write(STDERR_FILENO, "Not an executable\n", 19);
+		error_message(shell);
 		return (1);
 	}
 

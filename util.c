@@ -75,6 +75,8 @@ char **_realloc2(char **ptr, unsigned int old_size, unsigned int new_size)
 
 /**
  * error_message - displays error message to terminal
+ *
+ * @shell: the command
  */
 void error_message(shell_t *shell)
 {
