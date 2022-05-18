@@ -20,31 +20,21 @@
  * @argv: argument vector
  * @command: input command
  * @environ: env variables
- * @pName: the program name
- * @countP: counts number of processes
+ * @name: the program name
+ * @count: counts number of processes
  * @exitcode: the value the code exits
+ * @pid
  */
 typedef struct shell
 {
 	char **argv;
 	char *command;
 	char **environ;
-	char *pName;
-	int countP;
+	char *name;
+	int count;
 	int exitcode;
+	char *pid;
 } shell_t;
-
-/**
- * struct token - Singly linked list for token
- *
- * @value: value of token
- * @next: pointer to next token
- */
-typedef struct token
-{
-	char *value;
-	struct token *next;
-} token_t;
 
 /**
  * struct builtin - builtins
@@ -61,7 +51,7 @@ typedef struct builtin
 extern char **environ;
 
 /* setup */
-void initialize(shell_t *shell);
+void initialize(shell_t *shell, char **av);
 void uninitialize(shell_t *shell);
 void handl_signint(int sig);
 void repl(shell_t *shell);
@@ -84,5 +74,8 @@ int hsh_cd(shell_t *shell);
 void prompt(void);
 char *read_line(int *chr);
 char **tokenize(char *s);
+
+/* error */
+void error_message(shell_t *shell);
 
 #endif /* SHELL_H */

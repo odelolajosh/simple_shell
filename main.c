@@ -2,19 +2,16 @@
 
 /**
  * main - Runs the shell
- *
- * @argc: argument count
- * @argv: argument vector
- *
+ * @ac: argument count
+ * @av: argument vector
  * Return: 0
  */
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
 	shell_t shell;
-	(void) argc;
+	(void) ac;
 
-	shell.pName = argv[0];
-	initialize(&shell);
+	initialize(&shell, av);
 	signal(SIGINT, handl_signint);
 	repl(&shell);
 	uninitialize(&shell);

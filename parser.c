@@ -16,22 +16,26 @@ int parse_command(shell_t *shell, char *command)
 
 	shell->command = command;
 	shell->argv = tokenize(command);
-
-	if (shell->argv)
+	if (shell->argv == NULL)
 	{
-		/* Check for builtins */
-		handl = get_builtin_handl(shell->argv[0]);
-		if (handl)
-			flag = handl(shell);
-		else
-			flag = 1;
+		free(shell->command);
+		return (0);
+	}
 
-		if (flag == 1)
-			flag = execute(shell);
+	/* Check for builtins */
+	handl = get_builtin_handl(shell->argv[0]);
+	if (handl)
+		flag = handl(shell);
+	else
+		flag = 1;
+
+	if (flag == 1)
+		flag = execute(shell);
+
 	free(shell->argv);
 	free(shell->command);
-	}
-	shell->countP++;
+
+	(shell->count)++;
 
 	return (flag); /* Success */
 }

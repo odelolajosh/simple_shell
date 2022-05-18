@@ -21,75 +21,105 @@ char *_strcpy(char *dest, char *src)
 }
 
 /**
- * itoa - converts integer to string
- *
- * @num: integer to be converted to string
- * @str: buffer to hold the string
- * @base: base to be converted to
- * Return: returns the integer to be converted
+ * _atoi - converts a string to an integer
+ * @s: the string
+ * Return: int
  */
-char *itoa(int num, char *str, int base)
+int _atoi(char *s)
 {
-	int i = 0, isNegative = 0;
+	unsigned int len = 0, size = 0, p = 1, res = 0, sign = 1, i = 0;
 
-	/* Explicitly handle 0 */
-	if (num == 0)
+	while (*(s + len) != '\0')
 	{
-		str[i++] = '0';
-		str[i] = '\0';
-		return (str);
+		if (size > 0 && (*(s + len) < '0' || *(s + len) > '9'))
+			break;
+
+		if (*(s + len) == '-')
+			sign *= -1;
+
+		if ((*(s + len) >= '0') && (*(s + len) <= '9'))
+		{
+			if (size > 0)
+				p *= 10;
+
+			size++;
+		}
+		len++;
 	}
 
-	/* Handling negative numbers in base 10 as other bases are unsigned */
-	if (num < 0 && base == 10)
+	for (i = len - size; i < len; i++)
 	{
-		isNegative = 1;
-		num = -num;
+		res += ((*(s + i) - '0') * p);
+		p /= 10;
 	}
 
-	/* Loop through the digits */
-	while (num != 0)
-	{
-		int rem = num % base;
-
-		str[i++] = (rem > 9) ? (rem - 10) + 'a' : rem + '0';
-		num = num / base;
-	}
-
-	/* Append '-' if negative */
-	if (isNegative)
-		str[i++] = '-';
-
-	str[i] = '\0'; /* Add Null terminator */
-
-	/* Reverse the string */
-	rev_string(str, i);
-
-	return (str);
+	return (sign * res);
 }
 
 /**
- * rev_string - reverses a string
- *
- * @s: string to be reversed
- * @len: string length
+ * _intlen - get the length of an integer
+ * @n: given integer
+ * Return: length of integer
  */
-
-void rev_string(char *s, int len)
+int _intlen(int n)
 {
-	int max, half;
-	char first, last;
+	unsigned int len = 0, m;
 
-	max = len - 1;
-	half = max / 2;
-	while (half >= 0)
+	if (n < 0)
 	{
-		first = s[max - half];
-		last = s[half];
-		s[half] = first;
-		s[max - half] = last;
-		half--;
+		len++;
+		m = n * -1;
 	}
+	else
+	{
+		m = n;
+	}
+
+	if (n == 0)
+		return (1);
+
+	for (; m != 0; m /= 10)
+		len++;
+
+	return (len);
+}
+
+/**
+ * _itoa - get the length of an integer
+ * @n: given integer
+ * Return: length of integer
+ */
+char *_itoa(int n)
+{
+	unsigned int n1;
+	int length = _intlen(n);
+	char *buffer;
+
+	buffer = malloc(sizeof(char) * (length + 1));
+	if (buffer == 0)
+		return (NULL);
+
+	*(buffer + length) = '\0';
+
+	if (n < 0)
+	{
+		n1 = n * -1;
+		buffer[0] = '-';
+	}
+	else
+	{
+		n1 = n;
+	}
+
+	length--;
+	do {
+		*(buffer + length) = (n1 % 10) + '0';
+		n1 = n1 / 10;
+		length--;
+	}
+	while (n1 > 0)
+		;
+	return (buffer);
 }
 
 /**
