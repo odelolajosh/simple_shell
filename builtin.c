@@ -14,6 +14,7 @@ int (*get_builtin_handl(const char *command))(shell_t *shell)
 	builtin_t builtins[] = {
 		{ "exit", hsh_exit },
 		{ "env", hsh_env },
+		{ "cd", hsh_cd },
 		{ NULL, NULL }
 	};
 

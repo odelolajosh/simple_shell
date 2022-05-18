@@ -124,8 +124,9 @@ int _setenv(shell_t *shell, char *name, char *value, int overwrite)
  */
 int hsh_env(shell_t *shell)
 {
-	(void) shell;
 	int i = 0;
+	(void) shell;
+
 	/* Todo -> print envs */
 	while (environ[i] != NULL)
 	{
