@@ -69,7 +69,7 @@ int execute(shell_t *shell)
 	file = _which(shell->environ, shell->argv[0]);
 	if (!file)
 	{
-		error_message(shell);
+		write_error(shell, 127);
 		return (1);
 	}
 

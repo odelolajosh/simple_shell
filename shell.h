@@ -69,6 +69,8 @@ int (*get_builtin_handl(const char *cmd))(shell_t *shell);
 int hsh_exit(shell_t *shell);
 int hsh_env(shell_t *shell);
 int hsh_cd(shell_t *shell);
+int hsh_setenv(shell_t *shell);
+int hsh_unsetenv(shell_t *shell);
 
 /* utils */
 void prompt(void);
@@ -76,6 +78,6 @@ char *read_line(int *chr);
 char **tokenize(char *s);
 
 /* error */
-void error_message(shell_t *shell);
+void write_error(shell_t *shell, int status);
 
 #endif /* SHELL_H */

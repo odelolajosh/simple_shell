@@ -19,7 +19,7 @@ void cd_to(shell_t *shell, char *path)
 	if (chdir(path) != 0)
 	{
 		free(cwd_dup);
-		perror("hsh");
+		write_error(shell, 2);
 		return;
 	}
 

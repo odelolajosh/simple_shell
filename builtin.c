@@ -15,6 +15,8 @@ int (*get_builtin_handl(const char *command))(shell_t *shell)
 		{ "exit", hsh_exit },
 		{ "env", hsh_env },
 		{ "cd", hsh_cd },
+		{ "setenv", hsh_setenv },
+		{ "unsetenv", hsh_unsetenv },
 		{ NULL, NULL }
 	};
 
