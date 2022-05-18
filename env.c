@@ -124,13 +124,14 @@ int _setenv(shell_t *shell, char *name, char *value, int overwrite)
  */
 int hsh_env(shell_t *shell)
 {
-	int i = 0;
-	(void) shell;
+	int i = 0, len;
 
 	/* Todo -> print envs */
-	while (environ[i] != NULL)
+	while (shell->environ[i] != NULL)
 	{
-		printf("%s\n", environ[i]);
+		len = _strlen(shell->environ[i]);
+		write(STDOUT_FILENO, shell->environ[i], len + 1);
+		write(STDOUT_FILENO, "\n", 2);
 		i++;
 	}
 	return (0);
