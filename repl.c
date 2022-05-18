@@ -8,17 +8,20 @@
 void repl(shell_t *shell)
 {
 	char *cmd;
-	int chr, flag, isLoop;
+	int chr, flag, isLoop, tcheck;
 
+	tcheck = isatty(STDIN_FILENO);
 	do {
 		isLoop = 1;
-		prompt();
+		if (tcheck == 1)
+			prompt();
 
 		cmd = read_line(&chr);
 		if (chr == -1)
 		{
 			free(cmd);
-			write(STDOUT_FILENO, "\n", 2);
+			if (tcheck == 1)
+				write(STDOUT_FILENO, "\n", 2);
 			return;
 		}
 
