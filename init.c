@@ -9,7 +9,9 @@
 void initialize(shell_t *shell)
 {
 	unsigned int i;
+	int tcheck;
 
+	tcheck = isatty(STDIN_FILENO);
 	shell->argv = NULL;
 	shell->command = NULL;
 
@@ -26,6 +28,11 @@ void initialize(shell_t *shell)
 	for (i = 0; environ[i]; i++)
 		shell->environ[i] = _strdup(environ[i]);
 	shell->environ[i] = NULL;
+	shell->exitcode = 0;
+	if (tcheck != 1)
+		shell->countP = 1;
+	else
+		shell->countP = 0;
 }
 
 /**

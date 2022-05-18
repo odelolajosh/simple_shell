@@ -20,12 +20,18 @@
  * @argv: argument vector
  * @command: input command
  * @environ: env variables
+ * @pName: the program name
+ * @countP: counts number of processes
+ * @exitcode: the value the code exits 
  */
 typedef struct shell
 {
 	char **argv;
 	char *command;
 	char **environ;
+	char *pName;
+	int countP;
+	int exitcode;
 } shell_t;
 
 /**
