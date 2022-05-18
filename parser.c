@@ -11,25 +11,27 @@
  */
 int parse_command(shell_t *shell, char *command)
 {
-	int flag;
+	int flag = 0;
 	int (*handl)(shell_t *shell);
 
 	shell->command = command;
 	shell->argv = tokenize(command);
 
-	/* Check for builtins */
-	handl = get_builtin_handl(shell->argv[0]);
-	if (handl)
-		flag = handl(shell);
-	else
-		flag = 1;
+	if (shell->argv)
+	{
+		/* Check for builtins */
+		handl = get_builtin_handl(shell->argv[0]);
+		if (handl)
+			flag = handl(shell);
+		else
+			flag = 1;
 
-	if (flag == 1)
-		flag = execute(shell);
-
-	shell->countP++;
+		if (flag == 1)
+			flag = execute(shell);
 	free(shell->argv);
 	free(shell->command);
+	}
+	shell->countP++;
 
 	return (flag); /* Success */
 }
