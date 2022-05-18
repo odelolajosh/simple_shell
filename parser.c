@@ -27,6 +27,7 @@ int parse_command(shell_t *shell, char *command)
 	if (flag == 1)
 		flag = execute(shell);
 
+	shell->countP++;
 	free(shell->argv);
 	free(shell->command);
 
