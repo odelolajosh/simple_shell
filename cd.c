@@ -66,7 +66,7 @@ void cd_prev(shell_t *shell)
 	getcwd(cwd, sizeof(cwd));
 	len = _strlen(cwd) + 2;
 
-	message = malloc(sizeof(char) * (len + 2));
+	message = malloc(sizeof(char) * (len));
 	_strcpy(message, cwd);
 	_strcat(message, "\n\0");
 	write(STDOUT_FILENO, message, len);

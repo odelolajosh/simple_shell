@@ -17,9 +17,9 @@ void error_message(shell_t *shell, char *message, int status)
 	len2 = _strlen(count);
 	len3 = _strlen(shell->argv[0]);
 	len4 = _strlen(message);
-	len = len1 + 2 + len2 + 2 + len3 + len4 + 1;
+	len = len1 + 2 + len2 + 2 + len3 + len4;
 
-	error = malloc(sizeof(char) * len);
+	error = malloc(sizeof(char) * (len + 1));
 	_strcpy(error, shell->name);
 	_strcat(error, ": ");
 	_strcat(error, count);
