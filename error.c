@@ -41,7 +41,7 @@ void error_message(shell_t *shell, char *message, int status)
  */
 char *cd_error(shell_t *shell)
 {
-	char *message, *template = ": cd can't cd to ";
+	char *message, *template = ": can't cd to ";
 	int len, len2;
 
 	len = _strlen(template);
