@@ -85,6 +85,10 @@ void write_error(shell_t *shell, int status)
 
 	switch (status)
 	{
+		case -1:
+			message = _strdup(": Unable to add/remove from environment\n");
+			status = 1;
+			break;
 		case 126: /* Permission */
 			message = _strdup(": Permission denied\n");
 			break;

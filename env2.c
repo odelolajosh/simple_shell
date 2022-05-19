@@ -128,12 +128,10 @@ int hsh_setenv(shell_t *shell)
 	int flag = 1;
 
 	if (shell->argv[1] && shell->argv[2])
-	{
 		flag = _setenv(shell, shell->argv[1], shell->argv[2], 1);
-	}
-
+	
 	if (flag != 0)
-		write_error(shell, 127);
+		write_error(shell, -1);
 
 	return (0);
 }
@@ -149,12 +147,10 @@ int hsh_unsetenv(shell_t *shell)
 	int flag = 1;
 
 	if (shell->argv[1])
-	{
 		flag = _unsetenv(shell, shell->argv[1]);
-	}
-
+	
 	if (flag != 0)
-		write_error(shell, 127);
+		write_error(shell, -1);
 
 	return (0);
 }
