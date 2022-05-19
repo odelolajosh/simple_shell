@@ -9,23 +9,29 @@
  */
 void error_message(shell_t *shell, char *message, int status)
 {
-	int len = _strlen(shell->name), len2, len3, len4;
-	char *count;
+	int len, len1, len2, len3, len4;
+	char *count, *error;
 
 	count = _itoa(shell->count);
+	len1 = _strlen(shell->name);
 	len2 = _strlen(count);
 	len3 = _strlen(shell->argv[0]);
-	len4 = _strlen(message) + 1;
+	len4 = _strlen(message);
+	len = len1 + 2 + len2 + 2 + len3 + len4 + 1;
 
-	write(STDERR_FILENO, shell->name, len);
-	write(STDERR_FILENO, ": ", 3);
-	write(STDERR_FILENO, count, len2);
-	write(STDERR_FILENO, ": ", 3);
-	write(STDERR_FILENO, shell->argv[0], len3);
-	write(STDERR_FILENO, message, len4);
+	error = malloc(sizeof(char) * len);
+	_strcpy(error, shell->name);
+	_strcat(error, ": ");
+	_strcat(error, count);
+	_strcat(error, ": ");
+	_strcat(error, shell->argv[0]);
+	_strcat(error, message);
+	_strcat(error, "\0");
 
+	write(STDERR_FILENO, error, len);
 	shell->exitcode = status % 256;
 	free(count);
+	free(error);
 }
 
 /**
@@ -87,7 +93,7 @@ void write_error(shell_t *shell, int status)
 	{
 		case -1:
 			message = _strdup(": Unable to add/remove from environment\n");
-			status = 1;
+			status = 0;
 			break;
 		case 126: /* Permission */
 			message = _strdup(": Permission denied\n");

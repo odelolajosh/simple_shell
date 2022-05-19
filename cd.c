@@ -46,8 +46,6 @@ void cd_home(shell_t *shell)
 	home = _getenv(shell->environ, "HOME");
 	if (home)
 		cd_to(shell, home);
-	else
-		write(STDERR_FILENO, "hsh: cd: HOME not set\n", 22);
 }
 
 /**
@@ -58,16 +56,22 @@ void cd_home(shell_t *shell)
  */
 void cd_prev(shell_t *shell)
 {
-	char *prwd, cwd[PATH_MAX], len;
+	char *prwd, cwd[PATH_MAX], *message;
+	int len;
 
 	prwd = _getenv(shell->environ, "OLDPWD");
 	if (prwd)
 		cd_to(shell, prwd);
 
 	getcwd(cwd, sizeof(cwd));
-	len = _strlen(cwd);
-	write(STDOUT_FILENO, cwd, len + 1);
-	write(STDOUT_FILENO, "\n", 2);
+	len = _strlen(cwd) + 2;
+
+	message = malloc(sizeof(char) * (len + 2));
+	_strcpy(message, cwd);
+	_strcat(message, "\n\0");
+	write(STDOUT_FILENO, message, len);
+
+	free(message);
 }
 
 /**

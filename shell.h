@@ -23,7 +23,7 @@
  * @name: the program name
  * @count: counts number of processes
  * @exitcode: the value the code exits
- * @pid
+ * @pid: pid of current process
  */
 typedef struct shell
 {

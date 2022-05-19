@@ -21,9 +21,7 @@ int hsh_exit(shell_t *shell)
 
 		status = _atoi(shell->argv[1]);
 		shell->exitcode = status % 256;
-		return (EXIT_IND);
 	}
 
-	shell->exitcode = 0;
 	return (EXIT_IND);
 }

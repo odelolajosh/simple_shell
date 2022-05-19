@@ -137,7 +137,6 @@ int execute(shell_t *shell)
 			return (1);
 		}
 	}
-
 	if (check_error(shell, file) == 1)
 		return (1);
 
@@ -153,9 +152,10 @@ int execute(shell_t *shell)
 	}
 	else
 	{
-		wait(&sys);
+		do {
+			waitpid(pid, &sys, WUNTRACED);
+		} while (!WIFEXITED(sys) && !WIFSIGNALED(sys));
 	}
-
-	free(file);
+	free(file), shell->exitcode = sys / 256;
 	return (1);
 }
