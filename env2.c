@@ -87,7 +87,7 @@ int _unsetenv(shell_t *shell, char *name)
 	char *envv, *var_env, **newenviron;
 
 	if (!_getenv(shell->environ, name)) /* the env does not exist */
-		return (1);
+		return (0);
 
 	for (i = 0; shell->environ[i]; i++)
 		;
