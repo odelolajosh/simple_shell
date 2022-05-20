@@ -77,6 +77,7 @@ void prompt(void);
 char *read_line(int *chr);
 char **tokenize(char *s);
 char *analyze_cmd(shell_t *shell, char *cmd);
+char *exp_variables(shell_t *shell, char *s);
 
 /* error */
 void write_error(shell_t *shell, int status);

@@ -52,6 +52,9 @@ char *analyze_cmd(shell_t *shell, char *cmd)
 		return (NULL);
 
 	/* Variable expansion */
+	cmd = exp_variables(shell, cmd);
+	if (!cmd)
+		return (NULL);
 
 	return (cmd);
 }
